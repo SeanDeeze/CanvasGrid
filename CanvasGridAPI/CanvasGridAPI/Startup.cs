@@ -11,6 +11,7 @@ namespace CanvasGridAPI
 {
     public class Startup
     {
+        readonly string CORS_POLICY = "CorsPolicy";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -21,9 +22,16 @@ namespace CanvasGridAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
             services.AddDbContext<GridContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
-            services.Configure<GridConfig>(Configuration.GetSection("GridConfig"));
+            services.AddCors(options =>
+            {
+                options.AddPolicy(CORS_POLICY,
+                    builder => builder.AllowAnyOrigin()
+                                        .AllowAnyMethod()
+                                        .AllowAnyHeader());
+            });
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,6 +41,8 @@ namespace CanvasGridAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(CORS_POLICY);
 
             app.UseHttpsRedirection();
 
