@@ -1,5 +1,6 @@
 export interface Grid {
-    Id: number;
+    id: number;
+    used: boolean;
     order: number;
     image: string;
     title: string;

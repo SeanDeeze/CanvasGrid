@@ -1,5 +1,18 @@
-<div class="row">
-    <div class="container" *ngFor="let grid of grids; let i = index">
-        <img src="{{grid.image}}" alt="image placeholder" style="max-width: 50px; max-height: 50px;" />
+<div *ngIf="!selectedGrid" class="container">
+    <div class="row">
+        <div *ngFor="let grid of grids; let i = index">
+            <img *ngIf="!grid.used" (click)="showGrid(grid);" src="{{grid.image}}" alt="image placeholder"
+                style="max-width: 100px; max-height: 100px;" />
+        </div>
+    </div>
+</div>
+
+<div *ngIf="selectedGrid" class="container">
+    <div class="row">
+        <canvas class="canvas" width="800" height="480"></canvas>
+    </div>
+    <div clas="row">
+        <button type="button" class="btn btn-primary" (click)="saveGrid();">Save</button>
+        <button type="button" class="btn btn-danger" (click)="cancelGrid();">Cancel</button>
     </div>
 </div>

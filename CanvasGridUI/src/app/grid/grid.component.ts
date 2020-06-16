@@ -16,6 +16,7 @@ export class GridComponent implements OnInit {
   }
   gridService: GridService;
   grids: Grid[] = [];
+  selectedGrid: Grid = null;
 
   ngOnInit(): void {
     this.getCanvas();
@@ -31,5 +32,17 @@ export class GridComponent implements OnInit {
         });
       }
     });
+  }
+
+  showGrid(grid: Grid): any {
+    this.selectedGrid = grid;
+  }
+
+  saveGrid() {
+
+  }
+
+  cancelGrid() {
+    this.selectedGrid = null;
   }
 }
