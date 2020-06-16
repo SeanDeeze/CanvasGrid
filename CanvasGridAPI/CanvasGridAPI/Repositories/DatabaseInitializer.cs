@@ -17,7 +17,7 @@ namespace CanvasGridAPI.Repositories
             }
 
             //Make a 1000 X 1000 Grid
-            for (int i = 0; i < 5000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 context.Grids.Add(new Grid
                 {

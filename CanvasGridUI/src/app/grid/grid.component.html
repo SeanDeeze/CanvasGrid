@@ -9,10 +9,11 @@
 
 <div *ngIf="selectedGrid" class="container">
     <div class="row">
-        <canvas class="canvas" width="800" height="480"></canvas>
+        <canvas id="canvas" class="canvas" width="800" height="480"></canvas>
     </div>
     <div clas="row">
         <button type="button" class="btn btn-primary" (click)="saveGrid();">Save</button>
         <button type="button" class="btn btn-danger" (click)="cancelGrid();">Cancel</button>
+        <button type="button" class="btn btn-warning" (click)="revertGrid();">Revert</button>
     </div>
 </div>
