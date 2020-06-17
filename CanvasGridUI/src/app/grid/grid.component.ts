@@ -32,9 +32,7 @@ export class GridComponent implements OnInit {
     this.getCanvas();
     this.canvas = new fabric.Canvas('canvas', {
       isDrawingMode: true,
-      selection: true,
-      height: 480,
-      width: 800
+      selection: true
     });
 
     this.canvas.on('mouse:down', (e) => { this.mousedown(e); });
