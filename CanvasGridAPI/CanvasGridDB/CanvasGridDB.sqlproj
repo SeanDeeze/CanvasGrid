@@ -63,4 +63,7 @@
   <ItemGroup>
     <RefactorLog Include="CanvasGridDB.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="CanvasGridDB.publish.xml" />
+  </ItemGroup>
 </Project>
