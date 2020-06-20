@@ -10,7 +10,12 @@ import { Observable } from 'rxjs';
 export class GridService {
   constructor(private http: HttpClient) { }
   apiUrl: string = 'api/Grid/';
+
   LoadGrids(): Observable<any>{
     return this.http.get(environment.serviceURL + this.apiUrl +  'LoadGrids');
+  }
+
+  SaveGrid(formData: any){
+    return this.http.post(environment.serviceURL + this.apiUrl +  'SaveGrid', formData, {});
   }
 }

@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection.Metadata;
 
 namespace CanvasGridAPI.Models
 {
@@ -10,5 +12,7 @@ namespace CanvasGridAPI.Models
         public bool Used { get; set; }
         public string Image { get; set; }
         public string Title { get; set; }
+        [NotMapped]
+        public Blob File { get; set; }
     }
 }

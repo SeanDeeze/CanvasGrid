@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GridService } from '../services/grid.service';
 import { GridMessage } from '../models/gridMessage';
 import { Grid } from '../models/grid';
@@ -16,9 +16,13 @@ export class GridComponent implements OnInit {
   constructor(gridService: GridService) {
     this.gridService = gridService;
   }
-  gridService: GridService;
-  grids: Grid[] = [];
-  selectedGrid: Grid = null;
+
+  @ViewChild('canvas', { static: false }) myCanvas: ElementRef;
+  public context: HTMLCanvasElement;
+
+  public gridService: GridService;
+  public grids: Grid[] = [];
+  public selectedGrid: Grid = null;
   public canvas: Canvas;
   public pencolor = 'black';
   public pensize = 4;
@@ -157,7 +161,14 @@ export class GridComponent implements OnInit {
   }
 
   saveGrid() {
-    this.selectedGrid = null;
+    this.context = this.canvas.getElement();
+    this.context.toBlob((blob) => {
+      let gridData: any = this.selectedGrid;
+      gridData.append('file', blob, 'file.png');
+      this.gridService.SaveGrid(gridData).subscribe(() => {
+        this.selectedGrid = null;
+      });
+    });
   }
 
   revertGrid() {

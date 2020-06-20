@@ -35,5 +35,12 @@ namespace CanvasGridAPI.Repositories
 
             return returnGM;
         }
+
+        public GridMessage SaveGrid()
+        {
+            GridMessage returnGM = new GridMessage();
+
+            return returnGM;
+        }
     }
 }
