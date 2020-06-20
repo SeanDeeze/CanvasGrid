@@ -61,9 +61,6 @@
     <Build Include="Grids.sql" />
   </ItemGroup>
   <ItemGroup>
-    <RefactorLog Include="CanvasGridDB.refactorlog" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="CanvasGridDB.publish.xml" />
   </ItemGroup>
 </Project>
