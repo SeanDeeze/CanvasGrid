@@ -13,6 +13,6 @@ namespace CanvasGridAPI.Models
         public string Image { get; set; }
         public string Title { get; set; }
         [NotMapped]
-        public Blob File { get; set; }
+        public byte[] File { get; set; }
     }
 }
