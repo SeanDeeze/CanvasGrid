@@ -42,22 +42,28 @@ namespace CanvasGridAPI.Repositories
             return returnGM;
         }
 
-        public GridMessage SaveGrid(Grid grid)
+        public GridMessage SaveGrid(GridDTO gridDTO)
         {
             GridMessage returnGM = new GridMessage();
 
             try
             {
-                Grid updateGrid = _context.Grids.FirstOrDefault(g => g.Id == grid.Id);
+                Grid updateGrid = _context.Grids.FirstOrDefault(g => g.Id == gridDTO.id);
                 if (updateGrid != null)
                 {
-                    updateGrid = grid;
+                    string filePath = $"{_webHostEnvironment.WebRootPath}/Images/" + updateGrid.Title;
+
+                    updateGrid.Title = gridDTO.title;
+                    updateGrid.Used = true;
+                    updateGrid.Image = filePath;
                     _context.SaveChanges();
                     _logger.LogDebug($"{REPOSITORY_NAME}.{MethodBase.GetCurrentMethod()}; Updated Grid Saved");
 
-                    string filePath = "~/ProfilePic/" + updateGrid.Title;
-                    File.WriteAllBytes($"{_webHostEnvironment.WebRootPath}/Images/", updateGrid.File);
-                    _logger.LogDebug($"{REPOSITORY_NAME}.{MethodBase.GetCurrentMethod()}; Updated Grid Image File Saved");
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        gridDTO.file.CopyTo(fileStream);
+                    }
+                    _logger.LogDebug($"{REPOSITORY_NAME}.{MethodBase.GetCurrentMethod()}; Updated Grid Image File Saved", filePath);
 
                     returnGM.OperationStatus = true;
                 }

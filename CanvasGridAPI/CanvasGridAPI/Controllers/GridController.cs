@@ -1,6 +1,7 @@
 ﻿using CanvasGridAPI.Models;
 using CanvasGridAPI.Repositories;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -30,9 +31,10 @@ namespace CanvasGridAPI.Controllers
         }
 
         [HttpPost]
-        public GridMessage SaveGrid(Grid grid)
+        public GridMessage SaveGrid(IFormFile file, [FromForm]GridDTO grid)
         {
-            return _gridRepository.SaveGrid(grid);
+            // return _gridRepository.SaveGrid(grid);
+            return null;
         }
     }
 }

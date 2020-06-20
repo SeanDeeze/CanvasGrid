@@ -163,9 +163,14 @@ export class GridComponent implements OnInit {
   saveGrid() {
     this.context = this.canvas.getElement();
     this.context.toBlob((blob) => {
-      let gridData: any = this.selectedGrid;
-      gridData.append('file', blob, 'file.png');
-      this.gridService.SaveGrid(gridData).subscribe(() => {
+      const formData = new FormData();
+
+      this.selectedGrid.file = blob;
+      formData.append('grid', JSON.stringify(this.selectedGrid));
+
+      formData.append('file', blob, this.selectedGrid.title + '.png');
+      this.gridService.SaveGrid(formData).subscribe((result: GridMessage) => {
+        console.log('File Posted!!! ' + result.toString());
         this.selectedGrid = null;
       });
     });

@@ -18,7 +18,8 @@ namespace CanvasGridAPI.Repositories
             {
                 context.Grids.Add(new Grid
                 {
-                    Order = i
+                    Order = i,
+                    Title = "NewImage.png"
                 });
             }
 

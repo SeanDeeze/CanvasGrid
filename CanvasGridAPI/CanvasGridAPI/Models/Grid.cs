@@ -12,7 +12,15 @@ namespace CanvasGridAPI.Models
         public bool Used { get; set; }
         public string Image { get; set; }
         public string Title { get; set; }
-        [NotMapped]
-        public byte[] File { get; set; }
+    }
+
+    public class GridDTO
+    {
+        public int id { get; set; }
+        public int order { get; set; }
+        public bool used { get; set; }
+        public string image { get; set; }
+        public string title { get; set; }
+        public Microsoft.AspNetCore.Http.IFormFile file { get; set; }
     }
 }

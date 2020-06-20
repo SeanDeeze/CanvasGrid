@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  serviceURL: 'http://localhost:56885/',
-  imagesURL: 'http://localhost:56885/Images/'
+  serviceURL: 'https://localhost:44371/',
+  imagesURL: 'https://localhost:44371/Images/'
 };
 
 /*
