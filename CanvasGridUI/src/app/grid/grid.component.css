@@ -5,3 +5,12 @@
 .canvas {
   border: 2px solid black;
 }
+
+img {
+  padding: 1px;
+  border: 1px solid #021a40;
+  background-color: gray;
+  width:  100px;
+  height: 60px;
+  object-fit: cover;
+}

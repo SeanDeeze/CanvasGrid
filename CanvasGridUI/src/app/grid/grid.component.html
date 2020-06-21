@@ -1,8 +1,7 @@
 <div *ngIf="!selectedGrid" class="container">
     <div class="row">
         <div *ngFor="let grid of grids; let i = index">
-            <img (click)="showGrid(grid);" [src]="getLinkImage(grid)" alt="image placeholder"
-                style="max-width: 100px; max-height: 100px;" />
+            <img (click)="showGrid(grid);" [src]="getLinkImage(grid)" alt="image placeholder" />
         </div>
     </div>
 </div>

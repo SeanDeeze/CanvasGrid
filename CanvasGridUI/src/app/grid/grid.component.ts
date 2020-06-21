@@ -64,6 +64,7 @@ export class GridComponent implements OnInit {
     this.selectedGrid.base64File = this.canvas.toDataURL().replace(/^data:image\/(png|jpg);base64,/, '');
     this.gridService.SaveGrid(this.selectedGrid).subscribe((result: GridMessage) => {
       this.selectedGrid = null;
+      this.canvas.clear();
       this.getCanvas();
     });
   }
