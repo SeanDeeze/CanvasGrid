@@ -28,10 +28,11 @@ namespace CanvasGridAPI
             services.AddDbContext<GridContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
             services.AddCors(options =>
             {
-                options.AddPolicy(CORS_POLICY,
-                    builder => builder.AllowAnyOrigin()
-                                        .AllowAnyMethod()
-                                        .AllowAnyHeader());
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.WithOrigins("http://104.168.143.158/CanvasGrid/")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
             });
 
             services.Configure<FormOptions>(options =>
