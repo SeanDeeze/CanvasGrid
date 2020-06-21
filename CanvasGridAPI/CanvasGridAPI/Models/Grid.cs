@@ -21,6 +21,6 @@ namespace CanvasGridAPI.Models
         public bool used { get; set; }
         public string image { get; set; }
         public string title { get; set; }
-        public Microsoft.AspNetCore.Http.IFormFile file { get; set; }
+        public string base64File { get; set; }
     }
 }

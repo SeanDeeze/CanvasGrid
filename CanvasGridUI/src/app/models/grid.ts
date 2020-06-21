@@ -4,5 +4,5 @@ export interface Grid {
     order: number;
     image: string;
     title: string;
-    file: Blob;
+    base64File: string;
 }

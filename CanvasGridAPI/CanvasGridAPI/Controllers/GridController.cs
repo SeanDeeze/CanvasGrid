@@ -31,10 +31,9 @@ namespace CanvasGridAPI.Controllers
         }
 
         [HttpPost]
-        public GridMessage SaveGrid(IFormFile file, [FromForm]GridDTO grid)
+        public GridMessage SaveGrid(GridDTO grid)
         {
-            // return _gridRepository.SaveGrid(grid);
-            return null;
+            return _gridRepository.SaveGrid(grid);
         }
     }
 }

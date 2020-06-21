@@ -51,18 +51,18 @@ namespace CanvasGridAPI.Repositories
                 Grid updateGrid = _context.Grids.FirstOrDefault(g => g.Id == gridDTO.id);
                 if (updateGrid != null)
                 {
-                    string filePath = $"{_webHostEnvironment.WebRootPath}/Images/" + updateGrid.Title;
+                    string uniqueId = Guid.NewGuid().ToString();
+                    string fileName = $"{uniqueId}.png";
+                    string filePath = $"{_webHostEnvironment.ContentRootPath}/Images/{fileName}";
 
-                    updateGrid.Title = gridDTO.title;
+                    updateGrid.Title = fileName;
                     updateGrid.Used = true;
                     updateGrid.Image = filePath;
                     _context.SaveChanges();
                     _logger.LogDebug($"{REPOSITORY_NAME}.{MethodBase.GetCurrentMethod()}; Updated Grid Saved");
 
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        gridDTO.file.CopyTo(fileStream);
-                    }
+                    byte[] image = Convert.FromBase64String(gridDTO.base64File);
+                    File.WriteAllBytes(filePath, image);
                     _logger.LogDebug($"{REPOSITORY_NAME}.{MethodBase.GetCurrentMethod()}; Updated Grid Image File Saved", filePath);
 
                     returnGM.OperationStatus = true;

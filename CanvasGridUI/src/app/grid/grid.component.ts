@@ -50,7 +50,7 @@ export class GridComponent implements OnInit {
         this.grids = data.returnObject;
         this.grids.forEach(grid => {
           grid.image = grid.image === undefined || grid.image === null ?
-            environment.imagesURL + 'noimage.jpg' : environment.imagesURL + grid.image;
+            environment.imagesURL + 'noimage.jpg' : environment.imagesURL + grid.title;
         });
       }
     });
@@ -58,6 +58,30 @@ export class GridComponent implements OnInit {
 
   showGrid(grid: Grid): any {
     this.selectedGrid = grid;
+  }
+
+  saveGrid() {
+    this.selectedGrid.base64File = this.canvas.toDataURL().replace(/^data:image\/(png|jpg);base64,/, '');
+    this.gridService.SaveGrid(this.selectedGrid).subscribe((result: GridMessage) => {
+      this.selectedGrid = null;
+      this.getCanvas();
+    });
+  }
+
+  revertGrid() {
+    this.canvas.clear();
+  }
+
+  cancelGrid() {
+    this.canvas.clear();
+    this.selectedGrid = null;
+  }
+
+  getLinkImage(grid: Grid) {
+    if (grid.used) {
+      return grid.image + '?' + Date.now();
+    }
+    return grid.image;
   }
 
   /* Mouseup */
@@ -158,33 +182,5 @@ export class GridComponent implements OnInit {
       }
       this.canvas.renderAll();
     }
-  }
-
-  saveGrid() {
-    this.context = this.canvas.getElement();
-    this.context.toBlob((blob) => {
-      const formData = new FormData();
-
-      this.selectedGrid.file = blob;
-      formData.append('grid', JSON.stringify(this.selectedGrid));
-
-      formData.append('file', blob, this.selectedGrid.title + '.png');
-      this.gridService.SaveGrid(formData).subscribe((result: GridMessage) => {
-        console.log('File Posted!!! ' + result.toString());
-        this.selectedGrid = null;
-      });
-    });
-  }
-
-  revertGrid() {
-    this.canvas.clear();
-  }
-
-  cancelGrid() {
-    this.selectedGrid = null;
-  }
-
-  onCanvasClick() {
-
   }
 }

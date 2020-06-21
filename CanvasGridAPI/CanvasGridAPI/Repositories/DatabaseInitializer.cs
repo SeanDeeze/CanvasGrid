@@ -13,13 +13,12 @@ namespace CanvasGridAPI.Repositories
                 return;
             }
 
-            //Make a 1000 X 1000 Grid
             for (int i = 0; i < 1000; i++)
             {
                 context.Grids.Add(new Grid
                 {
                     Order = i,
-                    Title = "NewImage.png"
+                    Title = "newimage.png"
                 });
             }
 

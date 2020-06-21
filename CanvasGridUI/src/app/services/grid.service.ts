@@ -21,7 +21,7 @@ export class GridService {
 
   SaveGrid(formData: any) {
     return this.http.post(environment.serviceURL + this.apiUrl + 'SaveGrid', formData, {
-      headers: new HttpHeaders()
+      headers: this.headers
     });
   }
 }
