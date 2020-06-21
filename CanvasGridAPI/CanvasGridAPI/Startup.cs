@@ -32,7 +32,7 @@ namespace CanvasGridAPI
                     builder => builder.WithOrigins("http://104.168.143.158/CanvasGrid/")
                         .AllowAnyMethod()
                         .AllowAnyHeader()
-                        .AllowCredentials();
+                        .AllowCredentials());
             });
 
             services.Configure<FormOptions>(options =>
