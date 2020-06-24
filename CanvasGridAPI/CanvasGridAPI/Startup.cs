@@ -35,13 +35,6 @@ namespace CanvasGridAPI
                         .AllowCredentials());
             });
 
-            services.Configure<FormOptions>(options =>
-            {
-                options.MemoryBufferThreshold = int.MaxValue;
-                options.ValueLengthLimit = int.MaxValue;
-                options.MultipartBodyLengthLimit = int.MaxValue;
-            });
-
             services.AddControllers();
         }
 
@@ -58,6 +51,8 @@ namespace CanvasGridAPI
             app.UseRouting();
 
             app.UseAuthorization();
+            
+            app.UseExceptionHandler("/Error");
 
             app.UseEndpoints(endpoints =>
             {
