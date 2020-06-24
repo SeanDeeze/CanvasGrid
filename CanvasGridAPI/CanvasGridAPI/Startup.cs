@@ -31,8 +31,7 @@ namespace CanvasGridAPI
                 options.AddPolicy("CorsPolicy",
                     builder => builder.AllowAnyOrigin()
                         .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials());
+                        .AllowAnyHeader());
             });
 
             services.Configure<FormOptions>(options =>
