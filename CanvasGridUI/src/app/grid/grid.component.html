@@ -1,4 +1,4 @@
-<div *ngIf="!selectedGrid" class="container">
+<div *ngIf="!selectedGrid" class="container" #sectionNeedToScroll>
     <div class="row">
         <div *ngFor="let grid of grids; let i = index">
             <img (click)="showGrid(grid);" [src]="getLinkImage(grid)" alt="image placeholder" />

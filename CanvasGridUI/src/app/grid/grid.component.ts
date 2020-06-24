@@ -20,6 +20,8 @@ export class GridComponent implements OnInit {
   @ViewChild('canvas', { static: false }) myCanvas: ElementRef;
   public context: HTMLCanvasElement;
 
+  @ViewChild('topContainer') topContainer: ElementRef
+
   public gridService: GridService;
   public grids: Grid[] = [];
   public selectedGrid: Grid = null;
@@ -66,16 +68,23 @@ export class GridComponent implements OnInit {
       this.selectedGrid = null;
       this.canvas.clear();
       this.getCanvas();
+      this.returnToTop();
     });
   }
 
   revertGrid() {
     this.canvas.clear();
+    this.returnToTop();
+  }
+
+  returnToTop(){
+    this.topContainer.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   cancelGrid() {
     this.canvas.clear();
     this.selectedGrid = null;
+    this.returnToTop();
   }
 
   getLinkImage(grid: Grid) {
