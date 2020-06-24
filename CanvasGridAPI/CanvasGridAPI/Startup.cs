@@ -53,11 +53,6 @@ namespace CanvasGridAPI
             app.UseAuthorization();
             
             app.UseExceptionHandler("/Error");
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
             
             app.Use(async (context, next) => // Add dynamic redirection for angular-based requests
             {
@@ -72,12 +67,12 @@ namespace CanvasGridAPI
                 }
             });
 
-/*            app.UseStaticFiles(new StaticFileOptions
+            app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "Images")),
                 RequestPath = "/Images"
-            });*/
+            });
 
             DatabaseInitializer.Initialize(context);
         }
