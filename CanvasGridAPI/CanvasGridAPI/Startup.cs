@@ -55,8 +55,6 @@ namespace CanvasGridAPI
 
             app.UseCors(CORS_POLICY);
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();
