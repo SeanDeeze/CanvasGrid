@@ -63,6 +63,19 @@ namespace CanvasGridAPI
             {
                 endpoints.MapControllers();
             });
+            
+            app.Use(async (context, next) => // Add dynamic redirection for angular-based requests
+            {
+                await next();
+
+                if (context.Response.StatusCode == 404 &&
+                    !Path.HasExtension(context.Request.Path.Value) &&
+                    !context.Request.Path.Value.StartsWith("/api/"))
+                {
+                  context.Request.Path = "/index.html";
+                  await next();
+                }
+            });
 
             app.UseStaticFiles(new StaticFileOptions
             {
