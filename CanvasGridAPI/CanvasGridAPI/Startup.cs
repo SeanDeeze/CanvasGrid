@@ -72,12 +72,12 @@ namespace CanvasGridAPI
                 }
             });
 
-            app.UseStaticFiles(new StaticFileOptions
+/*            app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "Images")),
                 RequestPath = "/Images"
-            });
+            });*/
 
             DatabaseInitializer.Initialize(context);
         }
