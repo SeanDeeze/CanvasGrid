@@ -78,6 +78,8 @@ namespace CanvasGridAPI
                     Path.Combine(Directory.GetCurrentDirectory(), "Images")),
                 RequestPath = "/Images"
             });
+            
+            app.UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string> { "index.html" } });
 
             DatabaseInitializer.Initialize(context);
         }
