@@ -66,6 +66,7 @@ export class GridComponent implements OnInit {
       this.selectedGrid = null;
       this.canvas.clear();
       this.getCanvas();
+      document.body.scrollTop = 0;
     });
   }
 
@@ -76,6 +77,7 @@ export class GridComponent implements OnInit {
   cancelGrid() {
     this.canvas.clear();
     this.selectedGrid = null;
+    document.body.scrollTop = 0;
   }
 
   getLinkImage(grid: Grid) {
