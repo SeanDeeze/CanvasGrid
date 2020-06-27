@@ -22,6 +22,7 @@ export class GridComponent implements OnInit {
 
   public gridService: GridService;
   public grids: Grid[] = [];
+  public rowGrids: Grid[][] = [];
   public selectedGrid: Grid = null;
   public canvas: Canvas;
   public pencolor = 'black';
@@ -44,14 +45,47 @@ export class GridComponent implements OnInit {
     this.canvas.on('mouse:up', (e) => { this.mouseup(e); });
   }
 
+  randomizeColors() {
+    this.grids.forEach(grid => {
+      const gridElement = document.getElementById('gridId' + grid.id.toString());
+      if (gridElement !== null) {
+        gridElement.style.color = this.generateRandomColor();
+      }
+    });
+  }
+
+  generateRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
   getCanvas() {
     this.gridService.LoadGrids().subscribe((data: GridMessage) => {
       if (data.operationStatus) {
         this.grids = data.returnObject;
+        let rowGridIndex: number = 0;
+        let rowIndex: number = 0;
         this.grids.forEach(grid => {
           grid.image = grid.image === undefined || grid.image === null ?
-            environment.imagesURL + 'noimage.jpg' : environment.imagesURL + grid.title;
+            '' : environment.imagesURL + grid.title;
+
+          if (this.rowGrids[rowGridIndex] === undefined) {
+            this.rowGrids[rowGridIndex] = [];
+          }
+
+          this.rowGrids[rowGridIndex][rowIndex] = grid;
+          if (rowIndex === 49) {
+            rowGridIndex++;
+            rowIndex = 0;
+          } else {
+            rowIndex++;
+          }
         });
+        this.randomizeColors();
       }
     });
   }
@@ -78,13 +112,6 @@ export class GridComponent implements OnInit {
     this.canvas.clear();
     this.selectedGrid = null;
     document.body.scrollTop = 0;
-  }
-
-  getLinkImage(grid: Grid) {
-    if (grid.used) {
-      return grid.image + '?' + Date.now();
-    }
-    return grid.image;
   }
 
   /* Mouseup */

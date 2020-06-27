@@ -16,4 +16,10 @@
   <ItemGroup>
     <Folder Include="Images\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Images\noimage.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

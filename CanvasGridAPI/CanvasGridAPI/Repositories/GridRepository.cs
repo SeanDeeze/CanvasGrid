@@ -29,7 +29,12 @@ namespace CanvasGridAPI.Repositories
             try
             {
                 IEnumerable<Grid> grids = _context.Grids.OrderBy(g => g.Order).ToList();
-
+                int DateTimeSeed = DateTime.Now.Millisecond;
+                foreach (Grid grid in grids)
+                {
+                    if (grid != null && !string.IsNullOrEmpty(grid.Title))
+                    { grid.Title = $"{grid.Title}?{DateTimeSeed}"; }
+                }
                 returnGM.ReturnObject = grids;
                 returnGM.OperationStatus = true;
             }

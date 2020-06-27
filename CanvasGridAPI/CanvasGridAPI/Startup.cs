@@ -30,7 +30,7 @@ namespace CanvasGridAPI
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.WithOrigins("http://104.168.143.158/")
+                    builder => builder.WithOrigins("http://localhost:56885")
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials());

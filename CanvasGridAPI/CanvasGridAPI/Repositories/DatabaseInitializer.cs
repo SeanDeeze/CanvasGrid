@@ -13,7 +13,7 @@ namespace CanvasGridAPI.Repositories
                 return;
             }
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 context.Grids.Add(new Grid
                 {

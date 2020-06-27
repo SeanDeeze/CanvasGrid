@@ -1,16 +1,26 @@
 .container {
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .canvas {
   border: 2px solid black;
 }
 
-img {
-  padding: 1px;
+.row-no-padding div div {
+  width:  90px;
+  height: 56px;
+}
+
+.row-no-padding div div{
+  padding: 0 !important;
   border: 1px solid #021a40;
-  background-color: gray;
-  width:  100px;
-  height: 60px;
+  background-color: white;
+  object-fit: cover;
+}
+
+.row-no-padding div img {
+  padding: 0 !important;
+  border: 1px solid #021a40;
+  width: 100%;
   object-fit: cover;
 }
