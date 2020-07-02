@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewChildren, AfterViewInit, QueryList, Renderer2 } from '@angular/core';
 import { GridService } from '../services/grid.service';
 import { GridMessage } from '../models/gridMessage';
 import { Grid } from '../models/grid';
@@ -11,13 +11,16 @@ import { Canvas } from 'fabric/fabric-impl';
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.css']
 })
-export class GridComponent implements OnInit {
+export class GridComponent implements AfterViewInit {
 
-  constructor(gridService: GridService) {
+  constructor(gridService: GridService, renderer: Renderer2) {
     this.gridService = gridService;
+    this.renderer = renderer;
   }
 
   @ViewChild('canvas', { static: false }) myCanvas: ElementRef;
+  @ViewChildren('grids') elementGrids: QueryList<any>;
+  renderer: Renderer2;
   public context: HTMLCanvasElement;
 
   public gridService: GridService;
@@ -33,7 +36,7 @@ export class GridComponent implements OnInit {
   public comment: string;
   public readworkitem = 'readworkitem';
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.getCanvas();
     this.canvas = new fabric.Canvas('canvas', {
       isDrawingMode: true,
@@ -43,13 +46,21 @@ export class GridComponent implements OnInit {
     this.canvas.on('mouse:down', (e) => { this.mousedown(e); });
     this.canvas.on('mouse:move', (e) => { this.mousemove(e); });
     this.canvas.on('mouse:up', (e) => { this.mouseup(e); });
+
   }
 
-  randomizeColors() {
-    this.grids.forEach(grid => {
-      const gridElement = document.getElementById('gridId' + grid.id.toString());
-      if (gridElement !== null) {
-        gridElement.style.color = this.generateRandomColor();
+  initializeRandomColors() {
+    this.elementGrids.changes.subscribe((gridElements: ElementRef[]) => {
+      if (gridElements !== null && gridElements != undefined) {
+        gridElements.forEach(gridElement => {
+          if (gridElement != null && gridElement !== undefined) {
+            this.renderer.setStyle(gridElement.nativeElement, "background-color", this.generateRandomColor());
+          }else {
+            console.log("gridElement is undefined");
+          }
+        });
+      } else {
+        console.log("List of gridElements is null or undefined");
       }
     });
   }
@@ -78,14 +89,14 @@ export class GridComponent implements OnInit {
           }
 
           this.rowGrids[rowGridIndex][rowIndex] = grid;
-          if (rowIndex === 49) {
+          if (rowIndex === 99) {
             rowGridIndex++;
             rowIndex = 0;
           } else {
             rowIndex++;
           }
         });
-        this.randomizeColors();
+        this.initializeRandomColors();
       }
     });
   }

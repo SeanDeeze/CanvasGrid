@@ -15,9 +15,9 @@
 </nav>
 
 <div *ngIf="rowGrids && !selectedGrid">
-    <div class="row row-no-padding">
+    <div class="row row-no-padding flex-nowrap">
         <div *ngFor="let grids of rowGrids; let i = index">
-            <div *ngFor="let grid of grids">
+            <div *ngFor="let grid of grids" #grids>
                 <img *ngIf="grid && grid.image" [id]="'grid' + grid.id" (click)="showGrid(grid);" [src]="grid.image" alt="User Drawn Image" />
                 <div *ngIf="grid && !grid.image" [id]="'grid' + grid.id"  (click)="showGrid(grid);"></div>
             </div>

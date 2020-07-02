@@ -14,7 +14,6 @@
 .row-no-padding div div{
   padding: 0 !important;
   border: 1px solid #021a40;
-  background-color: white;
   object-fit: cover;
 }
 
