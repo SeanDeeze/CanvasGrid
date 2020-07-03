@@ -23,6 +23,9 @@ export class GridComponent implements AfterViewInit {
   renderer: Renderer2;
   public context: HTMLCanvasElement;
 
+  public timer: any;
+  public seizureModeBit: boolean = false;
+
   public gridService: GridService;
   public grids: Grid[] = [];
   public rowGrids: Grid[][] = [];
@@ -47,22 +50,52 @@ export class GridComponent implements AfterViewInit {
     this.canvas.on('mouse:move', (e) => { this.mousemove(e); });
     this.canvas.on('mouse:up', (e) => { this.mouseup(e); });
 
+    this.initializeRandomColors();
   }
 
   initializeRandomColors() {
     this.elementGrids.changes.subscribe((gridElements: ElementRef[]) => {
-      if (gridElements !== null && gridElements != undefined) {
+      if (gridElements !== null && gridElements !== undefined) {
         gridElements.forEach(gridElement => {
           if (gridElement != null && gridElement !== undefined) {
-            this.renderer.setStyle(gridElement.nativeElement, "background-color", this.generateRandomColor());
-          }else {
-            console.log("gridElement is undefined");
+            this.renderer.setStyle(gridElement.nativeElement, 'background-color', this.generateRandomColor());
+          } else {
+            console.log('gridElement is undefined');
           }
         });
       } else {
-        console.log("List of gridElements is null or undefined");
+        console.log('List of gridElements is null or undefined');
       }
     });
+  }
+
+  setColors() {
+    this.elementGrids.forEach(gridElement => {
+      if (gridElement != null && gridElement !== undefined) {
+        this.renderer.setStyle(gridElement.nativeElement, 'background-color', this.generateRandomColor());
+      } else {
+        console.log('gridElement is undefined');
+      }
+    });
+  }
+
+  seizureMode() {
+    if (!this.seizureModeBit) {
+      this.timer = setInterval(() => { this.setColors(); }, 500);
+    } else {
+      clearInterval(this.timer);
+    }
+    this.seizureModeBit = !this.seizureModeBit;
+  }
+
+  randomizeList() {
+    const startIndex: number = this.grids.length - 1;
+    for (let index = startIndex; index > 0; index--) {
+      const j = Math.floor(Math.random() * index);
+      const temp = this.grids[index];
+      this.grids[index] = this.grids[j];
+      this.grids[j] = temp;
+    }
   }
 
   generateRandomColor() {
@@ -96,7 +129,6 @@ export class GridComponent implements AfterViewInit {
             rowIndex++;
           }
         });
-        this.initializeRandomColors();
       }
     });
   }
