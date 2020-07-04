@@ -18,8 +18,9 @@
     <div class="row row-no-padding flex-nowrap">
         <div *ngFor="let grids of rowGrids; let i = index">
             <div *ngFor="let grid of grids" #grids>
-                <img *ngIf="grid && grid.image" [id]="'grid' + grid.id" (click)="showGrid(grid);" [src]="grid.image" alt="User Drawn Image" />
-                <div *ngIf="grid && !grid.image" [id]="'grid' + grid.id"  (click)="showGrid(grid);"></div>
+                <img *ngIf="grid && grid.image" [id]="'grid' + grid.id" (click)="showGrid(grid);" [src]="grid.image"
+                    alt="User Drawn Image" />
+                <div *ngIf="grid && !grid.image" [id]="'grid' + grid.id" (click)="showGrid(grid);"></div>
             </div>
         </div>
     </div>
@@ -30,6 +31,10 @@
         <canvas id="canvas" class="canvas" width="800" height="480"></canvas>
     </div>
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+            <input hidden (change)="uploadImage($event)" #fileInput type="file" id="file" accept="image/x-png,image/gif,image/jpeg">
+        </div>
         <div class="btn-group mr-2" role="group" aria-label="First group">
             <button type="button" class="btn btn-primary" (click)="saveGrid();">Save</button>
             <button type="button" class="btn btn-danger" (click)="cancelGrid();">Cancel</button>

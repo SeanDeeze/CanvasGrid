@@ -53,6 +53,27 @@ export class GridComponent implements AfterViewInit {
     this.initializeRandomColors();
   }
 
+  uploadImage(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      if (!file.type || !file.type.toLowerCase().includes('image')) {
+        console.log('Only Upload Images');
+        return;
+      }
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        const data = e.target.result;
+        fabric.Image.fromURL(data, img => {
+          this.canvas.add(img);
+          this.canvas.centerObject(img);
+        });
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
   initializeRandomColors() {
     this.elementGrids.changes.subscribe((gridElements: ElementRef[]) => {
       if (gridElements !== null && gridElements !== undefined) {
