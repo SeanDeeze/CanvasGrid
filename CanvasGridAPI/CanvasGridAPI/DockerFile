@@ -12,6 +12,6 @@ RUN dotnet publish -c release -o /canvasgridapi --no-restore
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/core/runtime:3.1
-WORKDIR /app
-COPY --from=build /canvasgridapi .
+WORKDIR ../
+COPY --from=build /source .
 ENTRYPOINT ["dotnet", "canvasgridapi.dll"]
