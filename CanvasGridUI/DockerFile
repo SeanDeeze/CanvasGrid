@@ -6,4 +6,4 @@ WORKDIR /inetpub/wwwroot
 
 COPY /dist/CanvasGridUI .
 
-EXPOSE 9000:80
+EXPOSE 80
