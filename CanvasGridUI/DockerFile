@@ -2,7 +2,7 @@ FROM microsoft/iis
 
 #RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\CanvasGrid\*
 
-RUN powershell -NoProfile -Command New-Item -Path "c:\inetpub\wwwroot\" -Name "CanvasGrid" -ItemType "directory"
+RUN powershell -NoProfile -Command New-Item -Path C:\inetpub\wwwroot\ -Name "Ezines" -ItemType "directory"
 
 WORKDIR /inetpub/wwwroot/CanvasGrid
 
