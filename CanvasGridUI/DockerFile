@@ -4,8 +4,8 @@ FROM microsoft/iis
 
 RUN powershell -NoProfile -Command New-Item -Path C:\inetpub\wwwroot\ -Name "canvasgrid" -ItemType "directory"
 
-WORKDIR /inetpub/wwwroot/canvasgrid
-
 COPY c:/builds/canvasgrid/canvasgridui/dist/canvasgridui c:/inetpub/wwwroot/canvasgrid/
+
+WORKDIR /inetpub/wwwroot/canvasgrid
 
 EXPOSE 80
