@@ -6,6 +6,6 @@ RUN powershell -NoProfile -Command New-Item -Path C:\inetpub\wwwroot\ -Name "can
 
 WORKDIR /inetpub/wwwroot/canvasgrid
 
-COPY /dist/canvasgridui/* .
+COPY dist/canvasgridui/* .
 
 EXPOSE 80
