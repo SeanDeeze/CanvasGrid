@@ -1,3 +1,9 @@
-FROM nginx:1.17.1-alpine
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY /dist/CanvasGridUI /usr/share/nginx/html
+FROM microsoft/iis
+
+RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\*
+
+WORKDIR /inetpub/wwwroot
+
+COPY /dist/CanvasGridUI .
+
+EXPOSE 9000:80
