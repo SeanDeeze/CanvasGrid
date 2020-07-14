@@ -1,6 +1,6 @@
 FROM microsoft/iis
 
-RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\CanvasGrid\*
+#RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\CanvasGrid\*
 
 WORKDIR /inetpub/wwwroot/CanvasGrid
 
