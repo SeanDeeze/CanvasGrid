@@ -1,8 +1,8 @@
 FROM microsoft/iis
 
-RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\*
+RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\CanvasGrid\*
 
-WORKDIR /inetpub/wwwroot
+WORKDIR /inetpub/wwwroot/CanvasGrid
 
 COPY /dist/CanvasGridUI .
 
