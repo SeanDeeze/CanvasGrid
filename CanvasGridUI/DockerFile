@@ -2,9 +2,9 @@ FROM microsoft/iis
 
 #RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\CanvasGrid\*
 
-RUN powershell -NoProfile -Command New-Item -Path C:\inetpub\wwwroot\ -Name "canvasgrid" -ItemType "directory"
+RUN powershell -NoProfile -Command New-Item -Path C:\inetpub\wwwroot\ -Name "CanvasGrid" -ItemType "directory"
 
-WORKDIR /inetpub/wwwroot/canvasgrid
+WORKDIR /inetpub/wwwroot/CanvasGrid
 
 COPY dist/CanvasGridUI .
 
