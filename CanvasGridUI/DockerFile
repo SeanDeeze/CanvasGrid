@@ -1,11 +1,12 @@
-FROM microsoft/iis
+# stage 1
 
-#RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\CanvasGrid\*
+FROM node:alpine AS my-app-build
+WORKDIR /app
+COPY . .
+RUN npm install && npm run build
 
-RUN powershell -NoProfile -Command New-Item -Path C:\inetpub\wwwroot\ -Name "CanvasGrid" -ItemType "directory"
+# stage 2
 
-WORKDIR /inetpub/wwwroot/CanvasGrid
-
-ADD . .
-
+FROM nginx:alpine
+COPY --from=my-app-build /app/dist/canvasgridui /usr/share/nginx/html
 EXPOSE 80
