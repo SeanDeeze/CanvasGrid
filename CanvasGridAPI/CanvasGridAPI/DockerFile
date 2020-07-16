@@ -17,4 +17,4 @@ RUN dotnet publish -c Release -o canvasgridapi
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build-env /source/canvasgridapi .
-ENTRYPOINT ["dotnet", "canvasgridapi.dll"]
+ENTRYPOINT ["dotnet", "CanvasGridAPI.dll"]
