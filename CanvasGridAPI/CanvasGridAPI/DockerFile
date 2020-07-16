@@ -14,12 +14,14 @@ COPY . ./
 RUN dotnet publish -c Release -o canvasgridapi
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 
 #Required to make SQL connection work
 RUN sed -i 's/DEFAULT@SECLEVEL=2/DEFAULT@SECLEVEL=1/g' /etc/ssl/openssl.cnf
+RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /etc/ssl/openssl.cnf
 RUN sed -i 's/DEFAULT@SECLEVEL=2/DEFAULT@SECLEVEL=1/g' /usr/lib/ssl/openssl.cnf
+RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /usr/lib/ssl/openssl.cnf
 
 COPY --from=build-env /source/canvasgridapi .
 ENTRYPOINT ["dotnet", "CanvasGridAPI.dll"]
