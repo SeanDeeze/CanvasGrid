@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+    canvasgridapi:
+        image: sdeeze/canvasgridapi:ci-${environment_build_number-1.0}
+        ports:
+            - "80:80"
