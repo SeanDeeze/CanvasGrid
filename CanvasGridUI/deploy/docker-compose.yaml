@@ -1,8 +1,0 @@
-version: '3.1'
-
-services:
-    canvasgridui:
-        image: sdeeze/canvasgridui:ci-${environment_build_number-5ad478daa574d7d6cf5e87d14944b15bb36f7002}
-        restart: always
-        ports:
-            - "80:80"

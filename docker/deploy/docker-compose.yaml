@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+    canvasgrid:           
+        image: sdeeze/canvasgrid:${buildno-latest}
+        restart: always
+        ports:
+            - "8000:80"
