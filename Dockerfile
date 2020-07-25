@@ -44,7 +44,7 @@ RUN dotnet publish -c Release -o canvasgridapi
 RUN cp -r ./canvasgridapi/. /canvasgrid/
 
 WORKDIR /canvasgrid/
-COPY --from=base . .
+COPY --from=base /source/. .
 RUN ls
 
 EXPOSE 80
