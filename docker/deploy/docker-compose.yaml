@@ -3,7 +3,10 @@ version: '3'
 services:
     canvasgrid:           
         image: sdeeze/canvasgrid:${buildno-latest}
+        container_name: canvasgrid
         restart: always
         ports:
             - "8000:5000"
             - "8001:5001"
+            - "80:80"
+            - "443:443"

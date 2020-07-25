@@ -47,7 +47,10 @@ WORKDIR /canvasgrid/
 COPY --from=base /source/. .
 RUN ls
 
+ENV ASPNETCORE_URLS=http://+:80
 EXPOSE 80
 EXPOSE 443
+EXPOSE 5000
+EXPOSE 5001
 
 ENTRYPOINT ["dotnet", "CanvasGridAPI.dll"]
