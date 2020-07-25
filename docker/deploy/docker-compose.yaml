@@ -5,4 +5,5 @@ services:
         image: sdeeze/canvasgrid:${buildno-latest}
         restart: always
         ports:
-            - "8000:80"
+            - "8000:5000"
+            - "8001:5001"
