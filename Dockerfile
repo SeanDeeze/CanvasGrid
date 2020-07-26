@@ -44,7 +44,7 @@ RUN dotnet publish -c Release -o canvasgridapi
 RUN cp -r ./canvasgridapi/. /canvasgrid/
 
 WORKDIR /canvasgrid/
-COPY --from=base /source/. .
+COPY --from=base /source/dist/canvasgrid-ui/. .
 RUN ls
 
 ENV ASPNETCORE_URLS=http://+:80
