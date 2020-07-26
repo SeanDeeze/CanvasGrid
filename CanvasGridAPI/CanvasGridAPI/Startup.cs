@@ -2,7 +2,6 @@ using CanvasGridAPI.Models;
 using CanvasGridAPI.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -83,6 +82,16 @@ namespace CanvasGridAPI
             app.UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string> { "index.html" } });
 
             DatabaseInitializer.Initialize(context);
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "CanvasGridUI";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                }
+            });
         }
     }
 }
