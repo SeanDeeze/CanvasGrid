@@ -2,6 +2,7 @@ using CanvasGridAPI.Models;
 using CanvasGridAPI.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -86,6 +87,8 @@ namespace CanvasGridAPI
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "CanvasGridUI";
+
+                spa.UseAngularCliServer("start");
 
                 if (env.IsDevelopment())
                 {
