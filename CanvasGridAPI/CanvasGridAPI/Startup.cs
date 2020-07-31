@@ -86,7 +86,7 @@ namespace CanvasGridAPI
                 RequestPath = "/Images"
             });
 
-            DatabaseInitializer.Initialize(context);
+            app.UseSpaStaticFiles();
 
             app.UseSpa(spa =>
             {
@@ -98,6 +98,8 @@ namespace CanvasGridAPI
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            DatabaseInitializer.Initialize(context);
         }
     }
 }
