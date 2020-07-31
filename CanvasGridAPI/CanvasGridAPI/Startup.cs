@@ -87,7 +87,7 @@ namespace CanvasGridAPI
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "./CanvasGridUI/";
+                spa.Options.SourcePath = "./CanvasGridUI/dist/CanvasGridUI/";
 
                 if (env.IsDevelopment())
                 {
