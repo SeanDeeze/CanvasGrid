@@ -43,7 +43,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
     RUN cp -r ./canvasgridapi/. /canvasgrid/
 
     WORKDIR /canvasgrid/
-    COPY --from=base /source/. ./
+    COPY --from=base /source/. ./CanvasGridUI/
     RUN ls
 
     EXPOSE 80
