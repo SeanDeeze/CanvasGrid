@@ -61,18 +61,6 @@ namespace CanvasGridAPI
 
             app.UseExceptionHandler("/Error");
 
-            app.Use(async (context, next) => // Add dynamic redirection for angular-based requests
-            {
-                await next();
-
-                if (context.Response.StatusCode == 404 &&
-                    !Path.HasExtension(context.Request.Path.Value) &&
-                    !context.Request.Path.Value.StartsWith("/api/"))
-                {
-                    await next();
-                }
-            });
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
