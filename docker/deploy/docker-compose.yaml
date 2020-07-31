@@ -1,7 +1,8 @@
-version: '3'
+version: "3"
 
 services:
-    canvasgrid:           
+    canvasgrid:
+        build: ../../
         image: sdeeze/canvasgrid:${buildno-latest}
         container_name: canvasgrid
         restart: always
