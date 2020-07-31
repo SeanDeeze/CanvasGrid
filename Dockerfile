@@ -53,4 +53,4 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
     EXPOSE 5000
     EXPOSE 5001
 
-ENTRYPOINT ["dotnet", "CanvasGridAPI.dll"]
+ENTRYPOINT ["dotnet", "CanvasGrid.dll"]
