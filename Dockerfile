@@ -1,28 +1,28 @@
 # escape=` 
 
-# FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
+ FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
 
-#    WORKDIR /source
+    WORKDIR /source
 
     # Prevent 'Warning: apt-key output should not be parsed (stdout is not a terminal)'
-#    ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
+    ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 
     # install NodeJS 13.x
     # see https://github.com/nodesource/distributions/blob/master/README.md#deb
-#   RUN apt-get update -yq 
-#    RUN apt-get install curl gnupg -yq 
-#    RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
-#    RUN apt-get install -y nodejs
+   RUN apt-get update -yq 
+    RUN apt-get install curl gnupg -yq 
+    RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
+    RUN apt-get install -y nodejs
 
-#    COPY ./CanvasGridUI/package.json /source/package.json
-#    RUN npm install
-#    RUN npm i typescript@3.8
+    COPY ./CanvasGridAPI/CanvasGridUI/package.json /source/package.json
+    RUN npm install
+    RUN npm i typescript@3.8
     #RUN npm install -g @angular/cli@7.3.9
 
-#    COPY ./CanvasGridUI/. /source/
-#    RUN npm run-script compile
+    COPY ./CanvasGridUI/. /source/
+    RUN npm run-script compile
 
-#    RUN find -type d -exec chmod +w {} +
+    RUN find -type d -exec chmod +w {} +
 
 # https://hub.docker.com/_/microsoft-dotnet-core
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
@@ -33,7 +33,6 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 
     # Copy csproj and restore as distinct layers
     COPY ./CanvasGridAPI/CanvasGridAPI/*.csproj ./
-    #COPY ["./CanvasGridAPI/CanvasGridAPI/*.csproj", "./"]
     RUN dotnet restore
 
     # Copy everything else and build
@@ -44,7 +43,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
     RUN cp -r ./canvasgridapi/. /canvasgrid/
 
     WORKDIR /canvasgrid/
-#    COPY --from=base /source/. ./
+    COPY --from=base /source/. ./
     RUN ls
 
     EXPOSE 80
