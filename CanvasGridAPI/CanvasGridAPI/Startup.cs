@@ -38,6 +38,11 @@ namespace CanvasGridAPI
             });
 
             services.AddControllers();
+
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "./CanvasGridUI/dist";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,9 +58,9 @@ namespace CanvasGridAPI
             app.UseRouting();
 
             app.UseAuthorization();
-            
+
             app.UseExceptionHandler("/Error");
-            
+
             app.Use(async (context, next) => // Add dynamic redirection for angular-based requests
             {
                 await next();
@@ -64,8 +69,8 @@ namespace CanvasGridAPI
                     !Path.HasExtension(context.Request.Path.Value) &&
                     !context.Request.Path.Value.StartsWith("/api/"))
                 {
-                  //context.Request.Path = "/index.html";
-                  await next();
+                    //context.Request.Path = "/index.html";
+                    await next();
                 }
             });
 
@@ -80,12 +85,12 @@ namespace CanvasGridAPI
                     Path.Combine(Directory.GetCurrentDirectory(), "Images")),
                 RequestPath = "/Images"
             });
-            
+
             DatabaseInitializer.Initialize(context);
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "./CanvasGridUI/dist/CanvasGridUI/";
+                spa.Options.SourcePath = "./CanvasGridUI/dist";
 
                 if (env.IsDevelopment())
                 {
