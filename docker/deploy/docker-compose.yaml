@@ -9,3 +9,5 @@ services:
         ports:
             - "80:5000"
             - "443:5001"
+        environment: 
+            - ASPNETCORE_URLS=https://+;http://+;
