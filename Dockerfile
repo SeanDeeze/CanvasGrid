@@ -19,7 +19,7 @@
     RUN npm i typescript@3.8
     #RUN npm install -g @angular/cli@7.3.9
 
-    COPY ./CanvasGridUI/. /source/
+    COPY ./CanvasGridAPI/CanvasGridAPI/CanvasGridUI/. /source/
     RUN npm run-script compile
 
     RUN find -type d -exec chmod +w {} +
