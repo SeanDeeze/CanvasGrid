@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  serviceURL: 'https://localhost:5001/',
-  imagesURL: 'https://localhost:5001/Images/'
+  serviceURL: 'http://52.43.177.196/api/',
+  imagesURL: 'http://52.43.177.196/Images/'
 };
