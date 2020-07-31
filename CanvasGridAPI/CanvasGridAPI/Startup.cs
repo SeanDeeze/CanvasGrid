@@ -64,7 +64,7 @@ namespace CanvasGridAPI
                     !Path.HasExtension(context.Request.Path.Value) &&
                     !context.Request.Path.Value.StartsWith("/api/"))
                 {
-                  context.Request.Path = "/index.html";
+                  //context.Request.Path = "/index.html";
                   await next();
                 }
             });
@@ -81,8 +81,6 @@ namespace CanvasGridAPI
                 RequestPath = "/Images"
             });
             
-            app.UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string> { "index.html" } });
-
             DatabaseInitializer.Initialize(context);
 
             app.UseSpa(spa =>
