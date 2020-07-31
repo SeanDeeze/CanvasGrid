@@ -14,7 +14,7 @@
     RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
     RUN apt-get install -y nodejs
 
-    COPY ./CanvasGridAPI/CanvasGridUI/package.json /source/package.json
+    COPY ./CanvasGridAPI/CanvasGridAPI/CanvasGridUI/package.json /source/package.json
     RUN npm install
     RUN npm i typescript@3.8
     #RUN npm install -g @angular/cli@7.3.9
