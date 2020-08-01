@@ -69,13 +69,6 @@ namespace CanvasGridAPI
 
             app.UseSpaStaticFiles();
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                     Path.Combine(Directory.GetCurrentDirectory(), "Images")),
-                RequestPath = "/Images"
-            });
-
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "./CanvasGridUI/dist";

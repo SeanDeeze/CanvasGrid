@@ -58,7 +58,7 @@ namespace CanvasGridAPI.Repositories
                 {
                     string uniqueId = Guid.NewGuid().ToString();
                     string fileName = $"{uniqueId}.png";
-                    string filePath = $"{_webHostEnvironment.ContentRootPath}/Images/{fileName}";
+                    string filePath = $"{_webHostEnvironment.ContentRootPath}/wwwroot/Images/{fileName}";
 
                     updateGrid.Title = fileName;
                     updateGrid.Used = true;
