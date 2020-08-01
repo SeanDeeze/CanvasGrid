@@ -61,6 +61,7 @@ namespace CanvasGridAPI
 
             app.UseExceptionHandler("/Error");
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
