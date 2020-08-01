@@ -67,14 +67,14 @@ namespace CanvasGridAPI
                 endpoints.MapControllers();
             });
 
-            //app.UseStaticFiles(new StaticFileOptions
-            //{
-            //    FileProvider = new PhysicalFileProvider(
-            //        Path.Combine(Directory.GetCurrentDirectory(), "Images")),
-            //    RequestPath = "/Images"
-            //});
-
             app.UseSpaStaticFiles();
+
+            app.UseStaticFiles(new StaticFileOptions()
+    {
+        FileProvider = new PhysicalFileProvider(
+                            Path.Combine(Directory.GetCurrentDirectory(), @"Images")),
+                            RequestPath = new PathString("/Images")
+    });
 
             app.UseSpa(spa =>
             {
