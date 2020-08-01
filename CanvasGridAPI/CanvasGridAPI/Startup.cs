@@ -48,10 +48,7 @@ namespace CanvasGridAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GridContext context)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
 
             app.UseCors(CORS_POLICY);
 
@@ -61,14 +58,13 @@ namespace CanvasGridAPI
 
             app.UseExceptionHandler("/Error");
 
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
+            app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "./CanvasGridUI/dist";
