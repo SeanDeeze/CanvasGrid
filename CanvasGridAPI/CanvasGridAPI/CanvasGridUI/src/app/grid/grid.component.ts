@@ -115,6 +115,7 @@ export class GridComponent implements AfterViewInit {
       if (gridElement != null && gridElement !== undefined) {
         if (!this.simpsonsSeizureBit) {
           this.renderer.setStyle(gridElement.nativeElement, 'background-image', 'url("' + environment.imagesURL + '/seizurerobots.gif")');
+          this.renderer.setStyle(gridElement.nativeElement, 'background-size', 'contain');
         } else {
           this.renderer.setStyle(gridElement.nativeElement, 'background-image', 'none');
         }
