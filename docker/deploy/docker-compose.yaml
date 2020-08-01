@@ -12,4 +12,4 @@ services:
         environment: 
             - ASPNETCORE_URLS=https://+;http://+;
         volumes:
-            - /home/ubuntu/canvasgrid/Images:/canvasgrid/Images
+            - /home/ubuntu/canvasgrid/Images:/canvasgrid/wwwroot/Images
