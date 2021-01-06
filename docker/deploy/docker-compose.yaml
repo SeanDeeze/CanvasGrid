@@ -13,3 +13,8 @@ services:
             - ASPNETCORE_URLS=https://+;http://+;
         volumes:
             - /home/ubuntu/canvasgrid/Images:/canvasgrid/wwwroot/Images
+    db:
+        image: "mcr.microsoft.com/mssql/server"
+        environment:
+            SA_PASSWORD: "QJyDHjjatZ6T3jwtP9Yr6SYj"
+            ACCEPT_EULA: "Y"

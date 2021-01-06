@@ -24,11 +24,6 @@
 
     RUN find -type d -exec chmod +w {} +
 
-# https://hub.docker.com/_/microsoft-mssql-server
-FROM mcr.microsoft.com/mssql/server:2019-CU8-ubuntu-16.04 AS sql-server
-
-    RUN -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=QJyDHjjatZ6T3jwtP9Yr6SYj' -e 'MSSQL_PID=Express' -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest-ubuntu
-
 # https://hub.docker.com/_/microsoft-dotnet-core
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 
