@@ -20,3 +20,5 @@ services:
             ACCEPT_EULA: "Y"
         ports:
             - "1433:1433"
+        volumes:
+            - mssql-server-linux-data:/mssql/data
