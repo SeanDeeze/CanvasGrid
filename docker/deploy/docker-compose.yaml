@@ -16,7 +16,7 @@ services:
     db:
         image: "mcr.microsoft.com/mssql/server"
         environment:
-            SA_PASSWORD: "QJyDHjjatZ6T3jwtP9Yr6SYj"
+            SA_PASSWORD: "PASSWORD_REPLACE"
             ACCEPT_EULA: "Y"
         ports:
             - "1433:1433"
