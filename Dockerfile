@@ -6,6 +6,11 @@
 
     # Prevent 'Warning: apt-key output should not be parsed (stdout is not a terminal)'
     ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
+    
+    RUN sed -i 's/DEFAULT@SECLEVEL=2/DEFAULT@SECLEVEL=1/g' /etc/ssl/openssl.cnf
+    RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /etc/ssl/openssl.cnf
+    RUN sed -i 's/DEFAULT@SECLEVEL=2/DEFAULT@SECLEVEL=1/g' /usr/lib/ssl/openssl.cnf
+    RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /usr/lib/ssl/openssl.cnf
 
     # install NodeJS 13.x
     # see https://github.com/nodesource/distributions/blob/master/README.md#deb
