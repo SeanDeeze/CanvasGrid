@@ -15,6 +15,7 @@ services:
             - /home/ubuntu/canvasgrid/Images:/canvasgrid/wwwroot/Images
     db:
         image: "mcr.microsoft.com/mssql/server"
+        container_name: sqlexpress
         environment:
             SA_PASSWORD: "PASSWORD_REPLACE"
             ACCEPT_EULA: "Y"
