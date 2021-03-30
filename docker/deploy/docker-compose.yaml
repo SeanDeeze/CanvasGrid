@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 
 services:
     canvasgrid:
@@ -14,15 +14,16 @@ services:
         volumes:
             - /home/ubuntu/canvasgrid/Images:/canvasgrid/wwwroot/Images
     db:
-        image: "mcr.microsoft.com/mssql/server"
-        container_name: sqlexpress
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        container_name: sqlserver
+        user: root
         environment:
             SA_PASSWORD: "PASSWORD_REPLACE"
-            ACCEPT_EULA: "Y"
+            ACCEPT_EULA: Y
         ports:
             - "1433:1433"
         volumes:
-            - mssql-server-linux-data:/var/opt/mssql
+            - mssql-server-linux-data:/var/opt/mssql/data
 
 volumes:
   mssql-server-linux-data:
