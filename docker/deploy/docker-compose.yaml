@@ -16,6 +16,7 @@ services:
         image: mcr.microsoft.com/mssql/server:2019-latest
         container_name: sqlserver
         user: root
+        restart: always
         environment:
             SA_PASSWORD: "PASSWORD_REPLACE"
             ACCEPT_EULA: Y
