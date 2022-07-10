@@ -12,11 +12,11 @@
     RUN sed -i 's/DEFAULT@SECLEVEL=2/DEFAULT@SECLEVEL=1/g' /usr/lib/ssl/openssl.cnf
     RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /usr/lib/ssl/openssl.cnf
 
-    # install NodeJS 13.x
+    # install NodeJS 16.x
     # see https://github.com/nodesource/distributions/blob/master/README.md#deb
     RUN apt-get update -yq 
     RUN apt-get install curl gnupg -yq 
-    RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
+    RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
     RUN apt-get install -y nodejs
 
     COPY ./CanvasGridAPI/CanvasGridAPI/CanvasGridUI/package.json /source/package.json
