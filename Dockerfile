@@ -18,6 +18,9 @@
     RUN apt-get install curl gnupg -yq 
     RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
     RUN apt-get install -y nodejs
+    
+    # update npm
+    RUN npm install -g npm@9.1.2
 
     COPY ./CanvasGridAPI/CanvasGridAPI/CanvasGridUI/package.json /source/package.json
     RUN npm install
