@@ -24,8 +24,6 @@
 
     COPY ./CanvasGridAPI/CanvasGridAPI/CanvasGridUI/package.json /source/package.json
     RUN npm install
-    RUN npm i typescript@3.8
-    #RUN npm install -g @angular/cli@7.3.9
 
     COPY ./CanvasGridAPI/CanvasGridAPI/CanvasGridUI/. /source/
     RUN npm run-script compile
