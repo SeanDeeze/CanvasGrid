@@ -5,7 +5,7 @@ services:
         build: ./
         image: sdeeze/canvasgrid:${buildno-latest}
         container_name: canvasgrid
-        restart: always
+        restart: unless-stopped
         ports:
             - "8001:80"
         environment: 
