@@ -9,6 +9,6 @@ services:
         ports:
             - "8001:80"
         environment: 
-            - ASPNETCORE_URLS=https://+;http://+;
+            - ASPNETCORE_URLS=http://+;
         volumes:
             - /home/ubuntu/canvasgrid/Images:/canvasgrid/wwwroot/Images
