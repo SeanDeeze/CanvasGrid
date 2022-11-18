@@ -1,6 +1,6 @@
 {
     "name": "canvas-grid-ui",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -22,7 +22,7 @@
         "@types/fabric": "^3.6.5",
         "fabric": "^5.2.1",
         "ngx-bootstrap": "^5.6.1",
-        "primeicons": "^5.0.0",
+        "primeicons": "^6.0.0",
         "primeng": "^14.0.0",
         "rxjs": "~6.5.4",
         "tslib": "^1.13.0",
