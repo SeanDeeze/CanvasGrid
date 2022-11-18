@@ -12,18 +12,3 @@ services:
             - ASPNETCORE_URLS=https://+;http://+;
         volumes:
             - /home/ubuntu/canvasgrid/Images:/canvasgrid/wwwroot/Images
-    db:
-        image: mcr.microsoft.com/mssql/server:2019-latest
-        container_name: sqlserver
-        user: root
-        restart: always
-        environment:
-            SA_PASSWORD: "PASSWORD_REPLACE"
-            ACCEPT_EULA: Y
-        ports:
-            - "1433:1433"
-        volumes:
-            - mssql-server-linux-data:/var/opt/mssql/data
-
-volumes:
-  mssql-server-linux-data:
