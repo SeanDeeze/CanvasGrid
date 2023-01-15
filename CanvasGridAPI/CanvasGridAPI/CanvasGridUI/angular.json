@@ -120,5 +120,8 @@
             }
         }
     },
-    "defaultProject": "CanvasGridUI"
+    "defaultProject": "CanvasGridUI",
+    "cli": {
+      "analytics": false
+    }
 }
