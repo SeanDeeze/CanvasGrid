@@ -3,7 +3,7 @@
   <PropertyGroup>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseName>CanvasGridDB</TargetDatabaseName>
-    <DeployScriptFileName>CanvasGridDB.sql</DeployScriptFileName>
+    <DeployScriptFileName>CanvasGridDatabase.sql</DeployScriptFileName>
     <TargetConnectionString>Data Source=localhost;Persist Security Info=True;User ID=sa;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
     <BlockOnPossibleDataLoss>True</BlockOnPossibleDataLoss>

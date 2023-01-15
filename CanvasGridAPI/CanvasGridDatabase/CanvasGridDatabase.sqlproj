@@ -3,20 +3,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>CanvasGridDB</Name>
+    <Name>CanvasGridDatabase</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{f03c6141-cbe0-41e4-a6a1-8c5631e652cc}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <ProjectGuid>{191c785d-688f-4f81-84b2-0417145594b7}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>CanvasGridDB</RootNamespace>
-    <AssemblyName>CanvasGridDB</AssemblyName>
+    <RootNamespace>CanvasGridDatabase</RootNamespace>
+    <AssemblyName>CanvasGridDatabase</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
@@ -59,8 +59,5 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Grids.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CanvasGridDB.publish.xml" />
   </ItemGroup>
 </Project>
