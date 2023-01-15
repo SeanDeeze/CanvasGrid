@@ -20,10 +20,10 @@
     RUN apt-get install -y nodejs
     
     # update npm
-    RUN npm install -g npm@9.1.2
+    RUN npm install -g npm@9.3.0
 
     COPY ./CanvasGridAPI/CanvasGridAPI/CanvasGridUI/package.json /source/package.json
-    RUN npm install
+    RUN npm install --force
 
     COPY ./CanvasGridAPI/CanvasGridAPI/CanvasGridUI/. /source/
     RUN npm run-script compile
