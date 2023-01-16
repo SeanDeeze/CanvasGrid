@@ -14,10 +14,10 @@ FROM node:12.7-alpine AS build
 
     # install NodeJS 16.x
     # see https://github.com/nodesource/distributions/blob/master/README.md#deb
-    RUN apt-get update -yq 
-    RUN apt-get install curl gnupg -yq 
-    RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
-    RUN apt-get install -y nodejs
+    #RUN apt-get update -yq 
+    #RUN apt-get install curl gnupg -yq 
+    #RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+    #RUN apt-get install -y nodejs
     
     # update npm
     RUN npm install -g npm@9.3.0
