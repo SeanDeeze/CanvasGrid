@@ -34,7 +34,7 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
     RUN cp -r ./canvasgridapi/. /canvasgrid/
 
     WORKDIR /canvasgrid/
-    COPY --from=base /source/. ./CanvasGridUI/
+    COPY --from=build /source/. ./CanvasGridUI/
     RUN ls
 
 ENV ASPNETCORE_URLS=http://+:80/
