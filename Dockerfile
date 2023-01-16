@@ -1,6 +1,6 @@
 # escape=` 
 
-FROM node:12.7-alpine AS build
+FROM node:latest AS build
 
     WORKDIR /source
 
