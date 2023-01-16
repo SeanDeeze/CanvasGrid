@@ -1,7 +1,6 @@
 ﻿using CanvasGridAPI.Models;
 using CanvasGridAPI.Repositories;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

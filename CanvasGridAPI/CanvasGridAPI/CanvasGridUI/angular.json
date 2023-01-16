@@ -60,8 +60,7 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "CanvasGridUI:build",
-                        "progress": true
+                        "browserTarget": "CanvasGridUI:build"
                     },
                     "configurations": {
                         "production": {
@@ -120,7 +119,6 @@
             }
         }
     },
-    "defaultProject": "CanvasGridUI",
     "cli": {
       "analytics": false
     }

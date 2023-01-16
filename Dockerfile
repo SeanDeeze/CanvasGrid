@@ -1,6 +1,6 @@
 # escape=` 
 
- FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
+FROM node:12.7-alpine AS base
 
     WORKDIR /source
 
@@ -12,16 +12,17 @@
     RUN sed -i 's/DEFAULT@SECLEVEL=2/DEFAULT@SECLEVEL=1/g' /usr/lib/ssl/openssl.cnf
     RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /usr/lib/ssl/openssl.cnf
 
-    # install NodeJS 16.x
+    # install NodeJS 19.x
     # see https://github.com/nodesource/distributions/blob/master/README.md#deb
     RUN apt-get update -yq 
     RUN apt-get install curl gnupg -yq 
-    RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+    RUN curl -sL https://deb.nodesource.com/setup_19.x | bash -
     RUN apt-get install -y nodejs
     
     # update npm
     RUN npm install -g npm@9.3.0
 
+    # Copy only angular build files to source folder on image
     COPY ./CanvasGridAPI/CanvasGridAPI/CanvasGridUI/package.json /source/package.json
     RUN npm install --force
 
@@ -52,6 +53,6 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
     COPY --from=base /source/. ./CanvasGridUI/
     RUN ls
 
-    EXPOSE 80
-
+ENV ASPNETCORE_URLS=http://+:80/
+EXPOSE 80
 ENTRYPOINT ["dotnet", "CanvasGrid.dll"]
