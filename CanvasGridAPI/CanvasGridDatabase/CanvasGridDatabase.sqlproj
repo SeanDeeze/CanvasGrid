@@ -59,5 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Grids.sql" />
+    <Build Include="Logs.sql" />
   </ItemGroup>
 </Project>
