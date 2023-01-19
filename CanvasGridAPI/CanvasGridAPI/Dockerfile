@@ -1,9 +1,6 @@
-# escape=` 
-
 FROM node:latest AS build
-
     WORKDIR /source
-    # update npm
+
     RUN npm install -g npm@latest
 
     # Copy only angular build files to source folder on image
@@ -13,7 +10,7 @@ FROM node:latest AS build
     COPY ./CanvasGridAPI/CanvasGridAPI/CanvasGridUI/. /source/
     RUN npm run-script compile
 
-    RUN find -type d -exec chmod +w {} +
+    # RUN find -type d -exec chmod +w {} +
 
 # https://hub.docker.com/_/microsoft-dotnet-core
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env

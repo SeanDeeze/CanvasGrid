@@ -1,9 +1,10 @@
 using CanvasGridAPI.Models;
-using CanvasGridAPI.Repositories;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Web;
@@ -40,22 +41,28 @@ try
     builder.Host.UseNLog();
     WebApplication app = builder.Build();
 
+    if (app.Environment.IsDevelopment()) 
+    { 
+        app.UseDeveloperExceptionPage(); 
+    }
+
     app.UseCors(CORS_POLICY);
     app.UseRouting();
     app.UseAuthorization();
-
     app.UseExceptionHandler("/Error");
-
-    app.UseEndpoints(endpoints =>
-    {
-        endpoints.MapControllers();
-    });
+    app.MapControllers();
 
     app.UseStaticFiles();
     app.UseSpaStaticFiles();
     app.UseSpa(spa =>
     {
         spa.Options.SourcePath = "./CanvasGridUI/dist";
+
+        if (app.Environment.IsDevelopment())
+        {
+            spa.Options.StartupTimeout = new TimeSpan(0, 0, 80);
+            spa.UseAngularCliServer(npmScript: "start");
+        }
     });
 
     app.Run();
