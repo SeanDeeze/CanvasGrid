@@ -19,7 +19,11 @@ try
 
     WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-    builder.Services.AddDbContext<GridContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
+    // NLog: Setup NLog for Dependency injection
+    builder.Logging.ClearProviders();
+    builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Debug);
+    builder.Host.UseNLog();
+
     builder.Services.AddCors(options =>
     {
         options.AddPolicy("CorsPolicy",
@@ -29,47 +33,48 @@ try
                 .AllowCredentials());
     });
 
+    string DBConnectionString = builder.Configuration.GetConnectionString("DBConnection");
+    builder.Services.AddDbContext<GridContext>(options => options.UseSqlServer(DBConnectionString));
+
     builder.Services.AddControllers();
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
     builder.Services.AddSpaStaticFiles(configuration =>
     {
         configuration.RootPath = "./CanvasGridUI/dist";
     });
 
-    // NLog: Setup NLog for Dependency injection
-    builder.Logging.ClearProviders();
-    builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-    builder.Host.UseNLog();
     WebApplication app = builder.Build();
-
-    if (app.Environment.IsDevelopment()) 
-    { 
-        app.UseDeveloperExceptionPage(); 
-    }
 
     app.UseCors(CORS_POLICY);
     app.UseRouting();
-    app.UseAuthorization();
-    app.UseExceptionHandler("/Error");
     app.MapControllers();
 
-    app.UseStaticFiles();
-    app.UseSpaStaticFiles();
-    app.UseSpa(spa =>
+    if (app.Environment.IsDevelopment())
     {
-        spa.Options.SourcePath = "./CanvasGridUI/dist";
-
-        if (app.Environment.IsDevelopment())
+        app.UseDeveloperExceptionPage();
+        app.UseSwagger();
+        app.UseSwaggerUI(options =>
         {
-            spa.Options.StartupTimeout = new TimeSpan(0, 0, 80);
-            spa.UseAngularCliServer(npmScript: "start");
-        }
-    });
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+            options.RoutePrefix = string.Empty;
+        });
+    }
+    else
+    {
+        app.UseExceptionHandler("/Error");
+        app.UseStaticFiles();
+        app.UseSpaStaticFiles();
+        app.UseSpa(spa =>
+        {
+            spa.Options.SourcePath = "./CanvasGridUI/dist";
+        });
+    }
 
     app.Run();
 }
 catch (Exception exception)
 {
-    // NLog: catch setup errors
     logger.Error(exception, "Stopped program because of exception");
     throw;
 }
