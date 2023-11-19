@@ -1,4 +1,4 @@
-FROM node:latest AS build
+FROM node:21 AS build
     WORKDIR /source
 
     RUN npm install -g npm@latest
