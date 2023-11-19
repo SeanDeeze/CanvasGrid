@@ -25,7 +25,6 @@ export class GridComponent implements AfterViewInit {
 
   public timer: any;
   public seizureModeBit: boolean = false;
-  public simpsonsSeizureBit: boolean = false;
 
   public gridService: GridService;
   public grids: Grid[] = [];
@@ -113,17 +112,11 @@ export class GridComponent implements AfterViewInit {
   simpsonsSeizureMode() {
     this.elementGrids.forEach(gridElement => {
       if (gridElement != null && gridElement !== undefined) {
-        if (!this.simpsonsSeizureBit) {
-          this.renderer.setStyle(gridElement.nativeElement, 'background-image', 'url("' + environment.imagesURL + '/seizurerobots.gif")');
-          this.renderer.setStyle(gridElement.nativeElement, 'background-size', 'contain');
-        } else {
-          this.renderer.setStyle(gridElement.nativeElement, 'background-image', 'none');
-        }
+        this.renderer.setStyle(gridElement.nativeElement, 'background-image', 'none');
       } else {
         console.log('gridElement is undefined');
       }
     });
-    this.simpsonsSeizureBit = !this.simpsonsSeizureBit;
   }
 
   randomizeList() {

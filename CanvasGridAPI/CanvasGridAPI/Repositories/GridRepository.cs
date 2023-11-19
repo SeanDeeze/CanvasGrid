@@ -15,21 +15,58 @@ namespace CanvasGridAPI.Repositories
 
         private readonly ILogger _logger = logger;
         private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
-        private readonly GridContext _context = context;
+
+        public bool CreateData()
+        {
+            string methodName = $"{ClassName}.CreateData";
+            bool returnBool = false;
+            try
+            {
+                context.Database.EnsureCreated();
+                if (context.Grids.Any() == false)
+                {
+
+                    for (int i = 0; i < 5000; i++)
+                    {
+                        context.Grids.Add(new Grid
+                        {
+                            Order = i,
+                            Title = "newimage.png"
+                        });
+                    }
+
+                    context.SaveChanges();
+                }
+                returnBool = true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"{methodName}; Error Loading Grids. Error: {ex.Message}");
+            }
+
+            return returnBool;
+        }
 
         public GridMessage LoadGrids()
         {
             string methodName = $"{ClassName}.LoadGrids";
             GridMessage returnGM = new();
+
+            if(CreateData() == false)
+            {
+                returnGM.Message = $"{methodName}; Error Creating Grid Data Records! See Other Logs for Details.";
+                return returnGM;
+            }
+
             try
             {
-                IEnumerable<Grid> grids = _context.Grids.OrderBy(g => g.Order).ToList();
+                IEnumerable<Grid> grids = context.Grids.OrderBy(g => g.Order).ToList();
                 int DateTimeSeed = DateTime.Now.Millisecond;
                 foreach (Grid grid in grids)
                 {
                     if (grid != null && !string.IsNullOrEmpty(grid.Title))
-                    { 
-                        grid.Title = $"{grid.Title}?{DateTimeSeed}"; 
+                    {
+                        grid.Title = $"{grid.Title}?{DateTimeSeed}";
                     }
                 }
                 returnGM.ReturnObject = grids;
@@ -51,7 +88,7 @@ namespace CanvasGridAPI.Repositories
 
             try
             {
-                Grid updateGrid = _context.Grids.FirstOrDefault(g => g.Id == gridDTO.id);
+                Grid updateGrid = context.Grids.FirstOrDefault(g => g.Id == gridDTO.id);
                 if (updateGrid != null)
                 {
                     string uniqueId = Guid.NewGuid().ToString();
@@ -61,7 +98,7 @@ namespace CanvasGridAPI.Repositories
                     updateGrid.Title = fileName;
                     updateGrid.Used = true;
                     updateGrid.Image = filePath;
-                    _context.SaveChanges();
+                    context.SaveChanges();
                     _logger.LogDebug($"{ClassName}.{MethodBase.GetCurrentMethod()}; Updated Grid Saved");
 
                     byte[] image = Convert.FromBase64String(gridDTO.base64File);
