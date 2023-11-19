@@ -9,23 +9,18 @@ using System.Reflection;
 
 namespace CanvasGridAPI.Repositories
 {
-    public class GridRepository
+    public class GridRepository(ILogger logger, GridContext context, IWebHostEnvironment webHostEnvironment)
     {
-        private const string REPOSITORY_NAME = "GridRepository";
+        private const string ClassName = "GridRepository";
 
-        private readonly ILogger _logger;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly GridContext _context;
-        public GridRepository(ILogger logger, GridContext context, IWebHostEnvironment webHostEnvironment)
-        {
-            _logger = logger;
-            _context = context;
-            _webHostEnvironment = webHostEnvironment;
-        }
+        private readonly ILogger _logger = logger;
+        private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
+        private readonly GridContext _context = context;
 
         public GridMessage LoadGrids()
         {
-            GridMessage returnGM = new GridMessage();
+            string methodName = $"{ClassName}.LoadGrids";
+            GridMessage returnGM = new();
             try
             {
                 IEnumerable<Grid> grids = _context.Grids.OrderBy(g => g.Order).ToList();
@@ -33,15 +28,17 @@ namespace CanvasGridAPI.Repositories
                 foreach (Grid grid in grids)
                 {
                     if (grid != null && !string.IsNullOrEmpty(grid.Title))
-                    { grid.Title = $"{grid.Title}?{DateTimeSeed}"; }
+                    { 
+                        grid.Title = $"{grid.Title}?{DateTimeSeed}"; 
+                    }
                 }
                 returnGM.ReturnObject = grids;
                 returnGM.OperationStatus = true;
             }
             catch (Exception ex)
             {
-
-                returnGM.Message = $"{REPOSITORY_NAME}.{MethodBase.GetCurrentMethod()}; Error: {ex.Message}";
+                returnGM.Message = $"{methodName}; Error Encountered Loading Grids. See logs for full detials. Error: {ex.Message}";
+                _logger.LogError(ex, $"{methodName}; Error Loading Grids. Error: {ex.Message}");
             }
 
             return returnGM;
@@ -49,7 +46,8 @@ namespace CanvasGridAPI.Repositories
 
         public GridMessage SaveGrid(GridDTO gridDTO)
         {
-            GridMessage returnGM = new GridMessage();
+            string methodName = $"{ClassName}.SaveGrid";
+            GridMessage returnGM = new();
 
             try
             {
@@ -64,19 +62,19 @@ namespace CanvasGridAPI.Repositories
                     updateGrid.Used = true;
                     updateGrid.Image = filePath;
                     _context.SaveChanges();
-                    _logger.LogDebug($"{REPOSITORY_NAME}.{MethodBase.GetCurrentMethod()}; Updated Grid Saved");
+                    _logger.LogDebug($"{ClassName}.{MethodBase.GetCurrentMethod()}; Updated Grid Saved");
 
                     byte[] image = Convert.FromBase64String(gridDTO.base64File);
                     File.WriteAllBytes(filePath, image);
-                    _logger.LogDebug($"{REPOSITORY_NAME}.{MethodBase.GetCurrentMethod()}; Updated Grid Image File Saved", filePath);
+                    _logger.LogDebug($"{methodName}; Updated Grid Image File Saved", filePath);
 
                     returnGM.OperationStatus = true;
                 }
             }
             catch (Exception ex)
             {
-
-                _logger.LogDebug($"{REPOSITORY_NAME}.{MethodBase.GetCurrentMethod()}; Error During Operation: {ex.Message}", ex);
+                returnGM.Message = $"{methodName}; Error Encountered Savid Grid. See logs for full detials. Error: {ex.Message}";
+                _logger.LogError(ex, $"{methodName}; Error Saving Grid. Error: {ex.Message}");
             }
 
             return returnGM;

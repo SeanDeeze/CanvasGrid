@@ -6,10 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CanvasGridAPI.Models
 {
-    public class GridContext : DbContext
+    public class GridContext(DbContextOptions<GridContext> dbContextOptions) : DbContext(dbContextOptions)
     {
-        public GridContext(DbContextOptions<GridContext> dbContextOptions) : base(dbContextOptions) { }
-
         public DbSet<Grid> Grids { get; set; }
     }
 }

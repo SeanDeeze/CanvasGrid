@@ -1,6 +1,5 @@
 using CanvasGridAPI.Models;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +26,7 @@ try
     builder.Services.AddCors(options =>
     {
         options.AddPolicy("CorsPolicy",
-            builder => builder.WithOrigins("http://localhost:56885")
+            builder => builder.WithOrigins("http://localhost:56885", "https://localhost:44371")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
