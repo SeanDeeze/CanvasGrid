@@ -25,8 +25,7 @@ namespace CanvasGridAPI.Repositories
                 context.Database.EnsureCreated();
                 if (context.Grids.Any() == false)
                 {
-
-                    for (int i = 0; i < 5000; i++)
+                    for (int i = 0; i < 10000; i++)
                     {
                         context.Grids.Add(new Grid
                         {
@@ -34,7 +33,6 @@ namespace CanvasGridAPI.Repositories
                             Title = "newimage.png"
                         });
                     }
-
                     context.SaveChanges();
                 }
                 returnBool = true;
@@ -99,7 +97,7 @@ namespace CanvasGridAPI.Repositories
                     updateGrid.Used = true;
                     updateGrid.Image = filePath;
                     context.SaveChanges();
-                    _logger.LogDebug($"{ClassName}.{MethodBase.GetCurrentMethod()}; Updated Grid Saved");
+                    _logger.LogDebug($"{methodName}; Updated Grid Saved");
 
                     byte[] image = Convert.FromBase64String(gridDTO.base64File);
                     File.WriteAllBytes(filePath, image);
