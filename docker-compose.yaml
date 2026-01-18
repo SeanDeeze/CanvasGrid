@@ -13,3 +13,4 @@ services:
             - ASPNETCORE_URLS=https://+:443;http://+:80
         volumes:
             - /home/ubuntu/canvasgrid/Images:/canvasgrid/wwwroot/Images
+            - /data/certificates:/canvasgrid/certificates
