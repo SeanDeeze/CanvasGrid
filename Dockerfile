@@ -13,7 +13,7 @@ FROM node:21 AS build
     # RUN find -type d -exec chmod +w {} +
 
 # https://hub.docker.com/_/microsoft-dotnet-core
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-env
 
     LABEL maintainer='davidseandunn@gmail.com'
 
