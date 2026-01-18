@@ -7,9 +7,10 @@ import { fabric } from 'fabric';
 import { Canvas } from 'fabric/fabric-impl';
 
 @Component({
-  selector: 'app-grid',
-  templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.css']
+    selector: 'app-grid',
+    templateUrl: './grid.component.html',
+    styleUrls: ['./grid.component.css'],
+    standalone: false
 })
 export class GridComponent implements AfterViewInit {
 
