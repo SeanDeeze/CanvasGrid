@@ -21,6 +21,6 @@ services:
 
 secrets:
   site_cert:
-    file: /canvasgrid/certificates/fullchain1.pem
+    file: /data/certificates/fullchain1.pem
   site_key:
-    file: /canvasgrid/certificatesprivkey1.pem
+    file: /data/certificates/privkey1.pem
