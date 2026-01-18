@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
     canvasgrid:
         build: ./
@@ -11,6 +9,19 @@ services:
             - "8002:443"
         environment: 
             - ASPNETCORE_URLS=https://+:443;http://+:80
+            - ASPNETCORE_URLS=https://+:443
+            - Kestrel__Endpoints__Https__Url=https://*:443
+            - Kestrel__Endpoints__Https__Certificate__Path=/run/secrets/site_cert
+            - Kestrel__Endpoints__Https__Certificate__KeyPath=/run/secrets/site_key
+        secrets:
+            - site_cert
+            - site_key
         volumes:
             - /home/ubuntu/canvasgrid/Images:/canvasgrid/wwwroot/Images
             - /data/certificates:/canvasgrid/certificates
+
+secrets:
+  site_cert:
+    file: ./data/certificates/fullchain1.pem
+  site_key:
+    file: ./data/certificates/privkey1.pem
