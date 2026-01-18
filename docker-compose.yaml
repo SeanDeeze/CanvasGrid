@@ -22,6 +22,6 @@ services:
 
 secrets:
   site_cert:
-    file: /data/certificates/fullchain1.pem
+    file: ./prod/certs/fullchain1.pem
   site_key:
-    file: /data/certificates/privkey1.pem
+    file: ./prod/certs/privkey1.pem
