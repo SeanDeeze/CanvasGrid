@@ -18,7 +18,6 @@ services:
             - site_key
         volumes:
             - /home/ubuntu/canvasgrid/Images:/canvasgrid/wwwroot/Images
-            - /data/certificates:/canvasgrid/certificates
 
 secrets:
   site_cert:
