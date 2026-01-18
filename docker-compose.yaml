@@ -22,6 +22,6 @@ services:
 
 secrets:
   site_cert:
-    file: /canvasgrid/certificates/fullchain1.pem
+    file: /home/ubuntu/letsecnrypt/data/archive/seandunn.info/fullchain1.pem
   site_key:
-    file: /canvasgrid/certificatesprivkey1.pem
+    file: /home/ubuntu/letsecnrypt/data/archive/seandunn.info/privkey1.pem
