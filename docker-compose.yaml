@@ -10,6 +10,6 @@ services:
             - "8001:80"
             - "8002:443"
         environment: 
-            - ASPNETCORE_URLS="https://+;http://+"
+            - ASPNETCORE_URLS="https://+;http://+;"
         volumes:
             - /home/ubuntu/canvasgrid/Images:/canvasgrid/wwwroot/Images
