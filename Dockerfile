@@ -34,7 +34,7 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-env
     COPY --from=build /source/. ./CanvasGridUI/
     RUN ls
 
-ENV ASPNETCORE_URLS="https://+;http://+;"
+ENV ASPNETCORE_URLS=https://+:443;http://+:80
 EXPOSE 80
 EXPOSE 443
 ENTRYPOINT ["dotnet", "CanvasGrid.dll"]
