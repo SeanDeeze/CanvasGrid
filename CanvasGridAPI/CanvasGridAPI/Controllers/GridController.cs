@@ -32,7 +32,8 @@ namespace CanvasGridAPI.Controllers
         [HttpPost]
         public GridMessage SaveGrid(GridDTO grid)
         {
-            return _gridRepository.SaveGrid(grid);
+            // return _gridRepository.SaveGrid(grid);
+            return _gridRepository.LoadGrids();
         }
     }
 }
