@@ -1,4 +1,4 @@
-@if (rowGrids && !selectedGrid) {
+@if (rowGrids) {
   <div>
     <div class="row row-no-padding flex-nowrap">
       @for (grids of rowGrids; track grids; let i = $index) {
@@ -19,23 +19,6 @@
     </div>
   </div>
 }
-
-<div class="container" ng-hide="!selectedGrid">
-  <div class="row">
-    <canvas id="canvas" class="canvas" width="800" height="480"></canvas>
-  </div>
-  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-    <div class="btn-group mr-2" role="group" aria-label="First group">
-      <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-      <input hidden (change)="uploadImage($event)" #fileInput type="file" id="file" accept="image/x-png,image/gif,image/jpeg">
-    </div>
-    <div class="btn-group mr-2" role="group" aria-label="First group">
-      <button type="button" class="btn btn-primary" (click)="saveGrid();">Save</button>
-      <button type="button" class="btn btn-danger" (click)="cancelGrid();">Cancel</button>
-      <button type="button" class="btn btn-warning" (click)="revertGrid();">Revert</button>
-    </div>
-  </div>
-</div>
 
 <footer id="footer" class="footer">
   <button type="button" class="btn btn-primary" (click)="seizureMode();">Seizure Mode!</button>
